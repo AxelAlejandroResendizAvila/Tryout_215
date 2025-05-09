@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <conio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include <locale.h>
+//librerias
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define RESET   "\x1b[0m"
+
+//colores
+
+void NoDinero(){
+	printf(RED"Dinero insuficiente\n"RESET);
+}
+
+
+int main(){
+   setlocale(LC_ALL, ""); 
+   //Lenguaje Español
+	int opcion,O,error=0,dinero=200, A1=0,A2=0,A3=0;
+	do{
+		system("cls");
+		if(O==1){	
+		printf(RED"Opción Inválida\n"RESET);
+		O=0;
+		}
+		if(error==1){
+			NoDinero();
+			error=0;
+		}
+		//Mostrar Artículos
+		if(A1==1){		printf("Agua = 1\n");	}else if(A1>1){			printf("Aguas = %d\n", A1);	}
+		
+		if(A2==1){		printf("Manzana = 1\n");	}else if(A2>1){		printf("Manzanas = %d\n", A2);	}
+		
+		if(A3>0){printf("Chips = %d\n", A3);}
+			
+		//Para mostrar menu
+
+		
+		for(int i=0;i<120;i++){printf("*");}
+		printf("Tienes disponible: "GREEN"%d$"RESET
+		"\n\n\t\t1. Agua "GREEN"10$"RESET
+		"\n\n\t\t2. Manzana "GREEN"5$"RESET
+		"\n\n\t\t3. Chips "GREEN"15$"RESET
+		"\n\n\t\t"RED"4. Salir"RESET"\n",dinero);
+		for(int i=0;i<120;i++){printf("*");}
+		//Leer opción
+		scanf("%d",&opcion);
+		switch(opcion){
+			//Aguas
+			case 1:{
+				dinero-=10;
+				if(dinero>=0){
+					A1+=1;
+				}else {
+					dinero+=10;
+					error=1;
+				}
+				break;
+			}
+			//Manzanas
+			case 2:{
+				dinero-=5;
+				if(dinero>=0){
+					A2+=1;
+				}else {
+					dinero+=5;
+					error=1;
+				}
+				break;
+			}
+			//Chips
+			case 3:{
+				dinero-=15;
+				if(dinero>=0){
+					A3+=1;
+				}else {
+					dinero+=15;
+					error=1;
+				}
+				break;
+			//Salir
+			case 4:{
+					system("cls");
+					printf("Tus artículos:\n");
+				
+					if(A1==1){		printf("Agua = 1\n");	}else if(A1>1){			printf("Aguas = %d\n", A1);	}
+					
+					if(A2==1){		printf("Manzana = 1\n");	}else if(A2>1){		printf("Manzanas = %d\n", A2);	}
+					
+					if(A2>0){printf("Chips = %d\n", A3);}
+					printf("Gracias por tu compra!");
+					return 1;
+					break;
+				}
+			}
+			//Error
+			default:{
+				O=1;
+				break;
+			}
+		}
+		opcion=0;
+	}while(1);
+	return 1;
+}
